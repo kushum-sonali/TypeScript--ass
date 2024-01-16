@@ -28,9 +28,7 @@ const DepartmentComponent: React.FC<DepartmentComponentProps> = ({ data }) => {
     setOpen({ ...open, [id]: !open[id] });
   };
 
-  const handleCheck = (id: string) => {
-    // Your logic here
-  };
+
 
   return (
     <List>
@@ -43,7 +41,7 @@ const DepartmentComponent: React.FC<DepartmentComponentProps> = ({ data }) => {
               tabIndex={-1}
               disableRipple
               inputProps={{ 'aria-labelledby': `checkbox-list-label-${department.id}` }}
-              onChange={() => handleCheck(department.id)}
+            
             />
             <ListItemText primary={department.name} />
             {open[department.id] ? <ExpandLess /> : <ExpandMore />}
@@ -58,7 +56,7 @@ const DepartmentComponent: React.FC<DepartmentComponentProps> = ({ data }) => {
                     tabIndex={-1}
                     disableRipple
                     inputProps={{ 'aria-labelledby': `checkbox-list-label-${subDept.id}` }}
-                    onChange={() => handleCheck(subDept.id)}
+                    
                   />
                   <ListItemText primary={subDept.name} />
                 </ListItem>
