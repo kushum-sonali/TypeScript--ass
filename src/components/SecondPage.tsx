@@ -24,10 +24,11 @@ const SecondPage = () => {
   return (
     <div
       style={{
-        height: "100vh",
-        width: "100%",
+        height:'95vh',
+        width: "100vw",
         backgroundColor: "rgb(222,48,135)",
         overflowY: "scroll",
+        padding:'18px',
       }}
     >
       <Button
@@ -36,7 +37,7 @@ const SecondPage = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          right: "0",
+          right: 0,
           position: "relative",
           padding: "10px 20px",
           backgroundColor: "#007bff",
@@ -45,7 +46,8 @@ const SecondPage = () => {
           borderRadius: "5px",
           cursor: "pointer",
           fontSize: "16px",
-          marginLeft: "1330px",
+          bottom:'5px',
+        
 
           "&:hover": {
             backgroundColor: "#0056b3",
@@ -54,7 +56,7 @@ const SecondPage = () => {
       >
         Logout
       </Button>
-      <DataGrid rows={data} columns={columns} checkboxSelection style={{}} />
+      <DataGrid rows={data} columns={columns} checkboxSelection  />
     </div>
   );
 };
