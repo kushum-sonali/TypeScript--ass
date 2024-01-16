@@ -1,0 +1,72 @@
+/* Style the form itself */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* color: beige; */
+}
+.main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    background-color: gray;
+    /* color: white; */
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 18px;
+    flex-direction: column;
+    max-width: 500px; /* Adjust the width as needed */
+    margin: auto; /* Center the form on the page */
+    gap: 20px;
+    background-color: rgb(17,205,206);
+    height: 50vh; /* Space between fields */
+    width: 50vw;
+    border-radius: 25px;
+    color: white;
+    opacity: 1;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 25px;
+    box-shadow: rgb(31, 31, 31);
+  }
+  
+  /* Style the text fields */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Larger font size */
+    color: white;
+  }
+  
+  
+  /* Style the submit button */
+  .btn {
+    padding: 10px 20px;
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease; /* Smooth background color change on hover */
+  }
+  
+  .btn:hover {
+    background-color: #0056b3; /* Darken button color on hover */
+  }
+  
+  /* Add responsiveness */
+  @media (max-width: 600px) {
+    form {
+      width: 90%; /* Make form take more width on smaller screens */
+    }
+  }
+  
