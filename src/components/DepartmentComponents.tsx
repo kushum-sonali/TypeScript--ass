@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { List, ListItem, ListItemText, Collapse, Checkbox } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 
-
 // Define types for your data if using TypeScript
 type Department = {
   id: string;
@@ -22,17 +21,37 @@ type DepartmentComponentProps = {
 };
 
 const DepartmentComponent: React.FC<DepartmentComponentProps> = ({ data }) => {
+  const [departments, setDepartments] = useState<Department[]>(data);
   const [open, setOpen] = useState<{ [key: string]: boolean }>({});
 
   const handleClick = (id: string) => {
     setOpen({ ...open, [id]: !open[id] });
   };
 
-
+  const handleCheck = (id: string, isSubDept: boolean, parentId?: string) => {
+    setDepartments(prevDepartments =>
+      prevDepartments.map(dept => {
+        if (isSubDept && dept.id === parentId) {
+          // Handle sub-department check
+          const newSubDepts = dept.subDepartments.map(subDept =>
+            subDept.id === id ? { ...subDept, checked: !subDept.checked } : subDept
+          );
+          const allChecked = newSubDepts.every(subDept => subDept.checked);
+          return { ...dept, checked: allChecked, subDepartments: newSubDepts };
+        } else if (!isSubDept && dept.id === id) {
+          // Handle department check
+          const newChecked = !dept.checked;
+          const newSubDepts = dept.subDepartments.map(subDept => ({ ...subDept, checked: newChecked }));
+          return { ...dept, checked: newChecked, subDepartments: newSubDepts };
+        }
+        return dept;
+      })
+    );
+  };
 
   return (
     <List>
-      {data.map((department) => (
+      {departments.map((department) => (
         <React.Fragment key={department.id}>
           <ListItem button onClick={() => handleClick(department.id)}>
             <Checkbox
@@ -41,7 +60,7 @@ const DepartmentComponent: React.FC<DepartmentComponentProps> = ({ data }) => {
               tabIndex={-1}
               disableRipple
               inputProps={{ 'aria-labelledby': `checkbox-list-label-${department.id}` }}
-            
+              onChange={() => handleCheck(department.id, false)}
             />
             <ListItemText primary={department.name} />
             {open[department.id] ? <ExpandLess /> : <ExpandMore />}
@@ -56,7 +75,7 @@ const DepartmentComponent: React.FC<DepartmentComponentProps> = ({ data }) => {
                     tabIndex={-1}
                     disableRipple
                     inputProps={{ 'aria-labelledby': `checkbox-list-label-${subDept.id}` }}
-                    
+                    onChange={() => handleCheck(subDept.id, true, department.id)}
                   />
                   <ListItemText primary={subDept.name} />
                 </ListItem>
@@ -70,4 +89,5 @@ const DepartmentComponent: React.FC<DepartmentComponentProps> = ({ data }) => {
 };
 
 export default DepartmentComponent;
+
 
